@@ -7,14 +7,10 @@
 
 import scrapy
 
-# from scrapy_djangoitem import DjangoItem
-# from mova.models import Actor
 
-
-# class FilmItem(DjangoItem):
-#     DjangoItem = Actor
-
-
+# 定义需要爬取的电影信息
+# 电影名、上映时间、电影类型、评分、导演、演员
+# 首日票房、首周票房、累计票房、评分、评分人数
 class MovieItem(scrapy.Item):
     name = scrapy.Field()
     releasetime = scrapy.Field()
