@@ -8,28 +8,28 @@ from mdjango.runspider import thread
 def handle(f_name, f_director, f_actor):
     ans = []
     fid = []
-    if f_name != '0':
+    if f_name != '0':#按照影片名要求搜索数据库
         op = {}
         it = Film.objects.get(name=f_name)
         fid.append(it.filmid)
     else:
         for item in Film.objects.all().values_list('filmid'):
             fid.append(int(list(item)[0]))
-    if f_director != '0':
+    if f_director != '0':#按照导演名要求搜索数据库
         res = Director.objects.filter(name=f_director)
         fid1 = []
         for it in res:
             if it.filmid in fid:
                 fid1.append(it.filmid)
         fid = fid1
-    if f_actor != '0':
+    if f_actor != '0':#按照演员名要求搜索数据库
         res = Actor.objects.filter(name=f_actor)
         fid1 = []
         for it in res:
             if it.filmid in fid:
                 fid1.append(it.filmid)
         fid = fid1
-    for it in fid:
+    for it in fid:#将搜索结果装成字典写入jason文件中，同时向前端返回jason格式的数据
         target = Film.objects.get(filmid=it)
         op = {}
         op['name'] = target.name
